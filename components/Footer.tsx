@@ -10,7 +10,7 @@ function Footer() {
         <h5 className="font-bold ">ABOUT US </h5>
         <p>Accessibility</p>
         <p>This is not a real site </p>
-        <p>That's a pretty awesome clone </p>
+        <p>That is a pretty awesome clone </p>
         <p>Refferals accepted</p>
         <p>Papafam accepted</p>
       </div>
@@ -19,7 +19,7 @@ function Footer() {
        <h5 className="font-bold ">COMMUNITY </h5>
         <p>Accessibility</p>
         <p>This is not a real site </p>
-        <p>That's a pretty awesome clone </p>
+        <p>That is a pretty awesome clone </p>
         <p>Refferals accepted</p>
         <p>Papafam accepted</p>
 
@@ -30,7 +30,7 @@ function Footer() {
        <h5 className="font-bold ">HOST </h5>
         <p>Accessibility</p>
         <p>This is not a real site </p>
-        <p>That's a pretty awesome clone </p>
+        <p>That is a pretty awesome clone </p>
         <p>Refferals accepted</p>
         <p>Papafam accepted</p>
 
@@ -41,7 +41,7 @@ function Footer() {
        <h5 className="font-bold ">SUPPORT </h5>
         <p>Accessibility</p>
         <p>This is not a real site </p>
-        <p>That's a pretty awesome clone </p>
+        <p>That is a pretty awesome clone </p>
         <p>Refferals accepted</p>
         <p>Papafam accepted</p>
 
