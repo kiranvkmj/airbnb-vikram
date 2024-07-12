@@ -97,7 +97,7 @@ import {useEffect, useState} from "react";
 import { title } from "process";
 import MediumCard from  "../components/MediumCard";
 import LargeCard from  "../components/LargeCard";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
 
 // INDEX.JS FILE 
 

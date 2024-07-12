@@ -1,20 +1,40 @@
 import { headers } from "next/headers";
 import Image from "next/image";
 import { GlobeAltIcon,MenuIcon,UserCircleIcon,UsersIcon, SearchIcon  } from '@heroicons/react/solid';
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import { DateRangePicker } from 'react-date-range';
-// import {magnifyingGlass} from '@heroicons/react/solid'
 
+import { useRouter } from 'next/navigation';
 
-function Header(){
+import path from "path";
+
+interface HeaderProps {
+  placeholder?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ placeholder }) =>
+
+{
     const[SearchInput,setSearchInput]=useState("");
     const[startDate,setStartDate]=useState(new Date());
     const[endDate,setEndDate]=useState(new Date());
     const[noOfGuests,setNoOfGuests]=useState(1);
+    const [isMounted, setIsMounted] = useState(false);
+
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
+
+  // if (!isMounted) {
+  //   return null;
+  // }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
 
 
     const  handleSelect= (ranges:any)=>{
@@ -27,6 +47,39 @@ function Header(){
     const resetInput=()=>{
       setSearchInput("")
     }
+
+    const mytry={
+      pathname:"/search",
+      query:{
+        location:SearchInput,
+        startDate:startDate.toISOString(),
+        endDate:endDate.toISOString(),
+        noOfGuests,
+      },
+    }
+
+
+
+  
+  
+  function createUrl(options: { pathname: string; query: { location: string; startDate: string; endDate: string; noOfGuests: number; }; }): string {
+      const query = new URLSearchParams(options.query as any).toString();
+      return `${options.pathname}?${query}`;
+  }
+  
+  const url = createUrl(mytry);
+  console.log(url); // Output: /search?location=New+York&startDate=2024-05-23&endDate=2024-05-30&noOfGuests=2
+  
+    
+  
+
+  
+
+  const search = () => {
+    router.push(url)
+  };
+    
+
 
     const selectionRange={
       startDate:startDate,
@@ -43,7 +96,9 @@ function Header(){
             {/* left top part */}
 
 
-     <div className="relative flex items-center h-10 cursor-pointer my-auto" >
+     <div 
+      onClick={()=> router.push("/")}
+     className="relative flex items-center h-10 cursor-pointer my-auto" >
        <Image
         src="https://links.papareact.com/qd3"
         fill
@@ -65,7 +120,7 @@ function Header(){
       className="flex-grow pl-5 bg-transparent outline-none
       text-sm text-gray-600 placeholder-gray-400"
       type="text"  
-      placeholder="start your search"  />
+      placeholder={placeholder || "Start your search"} />
 
 
       < SearchIcon  className="hidden md:inline-flex
@@ -110,7 +165,7 @@ function Header(){
           <div className="flex">
             <button onClick={resetInput} className="flex-grow
             text-gray-500">Cancel</button>
-            <button className="flex-grow text-red-400">Search</button>
+            <button onClick={search} className="flex-grow text-red-400">Search</button>
             </div>
         </div>
       )}
@@ -124,65 +179,3 @@ export default  Header;
 
 
 
-
-
-
-
-
-
-
-// import { headers } from "next/headers";
-// import Image from "next/image";
-// import { GlobeAltIcon,MenuIcon,UserCircleIcon,UserIcon, SearchIcon  } from '@heroicons/react/solid';
-// // import {magnifyingGlass} from '@heroicons/react/solid'
-// function Header(){
-//     return(
-//      <header className="sticky top-0 z-50
-//      grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
-     
-//      {/* left top part */}
-
-
-//      <div className="relative flex items-center h-10 cursor-pointer my-auto" >
-//        <Image
-//         src="https://links.papareact.com/qd3"
-//         layout="fill"
-//         objectFit="contain"
-//         objectPosition="left" />
-//      </div>
-
-
-//      {/* middle top part */}
-
-
-//      <div  className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm ">
-//       <input className="flex-grow pl-5 bg-transparent outline-none
-//       text-sm text-gray-600 placeholder-gray-400"
-//       type="text"  
-//       placeholder="start your search"  />
-
-
-//       < SearchIcon  className="hidden md:inline-flex
-//       h-8 bg-red-400 text-white rounded-full p-2
-//       cursor-pointer md:mx-2" />
-//      </div>
-
-//      {/* right top part */}
-//         {/* <p>i am here </p> */}
-//       <div  className="flex items-center  space-x-4  justify-end text-gray-500">
-//         <p className="hidden  md:inline cursor-pointer">Become a host</p>
-//         <GlobeAltIcon className="h-6 cursor-pointer"/>
-
-
-//         <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
-//         <MenuIcon className="h-6"/>
-//         <UserCircleIcon className="h-6"/>
-//       </div>
-//       </div>
-
-     
-//      </header>
-//     )
-// }
-
-// export default  Header;
